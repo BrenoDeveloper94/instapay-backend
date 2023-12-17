@@ -1,0 +1,198 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+
+// ----------------- Models --------------------//
+
+// model users
+model User {
+    id             Int @id @default(autoincrement())
+    first_name     String @db.VarChar(20)
+    last_name      String @db.VarChar(20)
+    full_name      String @db.VarChar(60)
+    cpf            String @db.VarChar(14) @unique
+    email          String @db.VarChar(60) @unique
+    password       String @db.VarChar(255)
+    login          String @db.VarChar(60)
+    logged         Boolean @default(false)
+    last_acess     DateTime @updatedAt
+    login_type     Boolean @default(false)
+    url_profile    String @db.VarChar(255)
+    id_categories  Int
+
+    // Relations
+    category Category @relation(fields: [id_categories], references: [id])
+    proposal Proposal[]
+    accepted Accepted[]
+    notifications Notification[]
+    bank_account Bank_account[]
+    access Access[]
+    credit_card Credit_Card[]
+    bank_balance Bank_Balance[]
+
+    // Rename
+    @@map("users")
+}
+
+// model categories
+model Category {
+    id                 Int @id @default(autoincrement())
+    text_categories    String @db.VarChar(60)
+
+    // Relations
+    proposal Proposal[]
+    user User[]
+
+    // Rename
+    @@map("categories")
+}
+
+// accepted
+model Accepted {
+    id              Int @id @default(autoincrement())
+    id_influenser   Int
+    id_proposal     Int
+
+    // Relations
+    advertiser User @relation(fields: [id_influenser], references: [id])
+    proposal Proposal @relation(fields: [id_proposal], references: [id])
+    payments Payment[]
+
+    // Rename
+    @@map("accepted")
+}
+
+// proposal
+model Proposal {
+    id                 Int @id @default(autoincrement())
+    id_user            Int
+    id_categories      Int
+    title_proposal     String @db.VarChar(50)
+    description        String @db.Text
+    proposal_value     Float @db.Float
+    status_proposal    Boolean @default(false)
+    created_at         DateTime @default(now())
+
+    // Relations
+    user User @relation(fields: [id_user], references: [id])
+    categories Category @relation(fields: [id_categories], references: [id])
+    accepted Accepted[]
+    notification Notification[]
+
+    // Rename
+    @@map("proposals")
+}
+
+// notifications
+model Notification {
+    id                   Int @id @default(autoincrement())
+    id_proposal          Int
+    id_recipient         Int
+    status_view          Boolean @default(false)
+    created_at           DateTime @default(now())
+
+    // Relations
+    proposal Proposal @relation(fields: [id_proposal], references: [id])
+    user User @relation(fields: [id_recipient], references: [id])
+
+    // Rename
+    @@map("notifications")
+}
+
+// payments
+model Payment {
+    id                   Int @id @default(autoincrement())
+    id_accepted          Int
+    payment_value        Float @db.Float
+    created_at           DateTime @default(now())
+
+    // Relations
+    accepted Accepted @relation(fields: [id_accepted], references: [id])
+
+    // Rename
+    @@map("payments")
+}
+
+// bank_account
+model Bank_account {
+    id                   Int @id @default(autoincrement())
+    id_user              Int
+    id_bank              Int
+    agency               String @db.VarChar(100)
+    agency_digit         String @db.Char(1)
+    account              String @db.VarChar(11)
+    account_digit        String @db.Char(1)
+
+
+    // Relations
+    user User @relation(fields: [id_user], references: [id])
+    withdrawals Withdrawal[]
+
+
+    // Rename
+    @@map("bank_account")
+}
+
+// withdrawals
+model Withdrawal {
+    id                      Int @id @default(autoincrement())
+    id_bank_account         Int
+    withdrawals_amount      Float @db.Float
+    created_at              DateTime @default(now())
+
+    // Relations
+    bank_account Bank_account @relation(fields: [id_bank_account], references: [id])
+
+    // Rename
+    @@map("withdrawals")
+}
+
+// access
+model Access {
+    id_user           Int @id
+    status_access     Boolean @default(false)
+    updaded_at        DateTime @default(now())
+
+    // Relations
+    user User @relation(fields: [id_user], references: [id])
+
+    // Rename
+    @@map("access")
+}
+
+// Credit Card
+model Credit_Card {
+    id                Int @id @default(autoincrement())
+    id_user           Int
+    full_name         String @db.VarChar(60)
+    cpf               String @db.VarChar(14) @unique 
+    card_number       String @db.VarChar(16)
+    security_code     String @db.VarChar(3)
+    month             String @db.VarChar(2)
+    year              String @db.VarChar(2)
+
+    // Relations
+    user User @relation(fields: [id_user], references: [id])
+
+    // Rename
+    @@map("credit_card")
+}
+
+// Bank Balance
+model Bank_Balance {
+    id                Int @id @default(autoincrement())
+    id_user           Int
+    balance           Float @db.Float
+
+    // Relations
+    user User @relation(fields: [id_user], references: [id])
+
+    // Rename
+    @@map("bank_balance")
+}
