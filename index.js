@@ -19,6 +19,8 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json())
 app.use(cors())
 
+console.log('helow')
+
 // Routes
 app.use(routerUser)
 app.use(routerProposal)
