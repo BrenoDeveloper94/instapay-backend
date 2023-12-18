@@ -15,9 +15,7 @@ const read = async (req, res) => {
                     id_user: id
                 }
             })
-            res.json({
-                data: data[0]
-            })
+            res.json({data})
             
         } catch (error) {
             console.log(error)
