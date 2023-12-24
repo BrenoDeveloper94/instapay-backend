@@ -65,7 +65,8 @@ const create = async (req, res) => { // This function creates a new user in the 
                     last_acess: d,
                     login_type,
                     id_categories,
-                    url_profile
+                    url_profile,
+                    profile_image: ''
                 }
             })
             await prisma.access.create({
