@@ -14,6 +14,7 @@ const routerLogin = require('./src/login/controllers/loginControllers')
 const routerLogout = require('./src/logout/controllers/logoutControllers')
 const routerRedefinePassword = require('./src/redefinepassword/controllers/redefinepasswordControllers')
 const routerBankbalance = require('./src/bankbalance/controllers/bankbalanceControllers')
+const routerUpload = require('./src/files/controllers/filesControllers')
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json())
@@ -32,7 +33,7 @@ app.use(routerLogin)
 app.use(routerLogout)
 app.use(routerRedefinePassword)
 app.use(routerBankbalance)
-
+app.use(routerUpload)
 
 
 

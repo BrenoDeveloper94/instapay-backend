@@ -12,19 +12,20 @@ datasource db {
 
 // model users
 model User {
-    id             Int @id @default(autoincrement())
-    first_name     String @db.VarChar(20)
-    last_name      String @db.VarChar(20)
-    full_name      String @db.VarChar(60)
-    cpf            String @db.VarChar(14) @unique
-    email          String @db.VarChar(60) @unique
-    password       String @db.VarChar(255)
-    login          String @db.VarChar(60)
-    logged         Boolean @default(false)
-    last_acess     DateTime @updatedAt
-    login_type     Boolean @default(false)
-    url_profile    String @db.VarChar(255)
-    id_categories  Int
+    id               Int @id @default(autoincrement())
+    first_name       String @db.VarChar(20)
+    last_name        String @db.VarChar(20)
+    full_name        String @db.VarChar(60)
+    cpf              String @db.VarChar(14) @unique
+    email            String @db.VarChar(60) @unique
+    password         String @db.VarChar(255)
+    login            String @db.VarChar(60)
+    logged           Boolean @default(false)
+    last_acess       DateTime @updatedAt
+    login_type       Boolean @default(false)
+    url_profile      String @db.VarChar(255)
+    profile_image    String @db.VarChar(255)
+    id_categories    Int
 
     // Relations
     category Category @relation(fields: [id_categories], references: [id])
@@ -76,6 +77,7 @@ model Proposal {
     title_proposal     String @db.VarChar(50)
     description        String @db.Text
     proposal_value     Float @db.Float
+    file_image         String @db.VarChar(255)
     status_proposal    Boolean @default(false)
     created_at         DateTime @default(now())
 
