@@ -18,7 +18,6 @@ const uploadFiles = async (filename, filePath) => {
         })
 
         const media = {
-            //body: fs.createReadStream('./Eu.jpg')
             body: fs.createReadStream(filePath)
         }
 

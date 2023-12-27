@@ -7,6 +7,7 @@ const create = async (req, res) => {
 
     var data = {id_user, id_categories, title_proposal, description, proposal_value, arrayRecept} = req.body
 
+
     var id_user = parseInt(data.data.id_user)
     var id_categories = parseInt(data.data.id_categories)
     var title_proposal = lettersName(data.data.title_proposal)
@@ -23,8 +24,9 @@ const create = async (req, res) => {
     })
 
     const foundTitle = proposal.filter(proposal =>{
-        return proposal.title_proposal == data.title_proposal
+        return proposal.title_proposal == title_proposal
     })
+
 
     if (foundTitle == '') {
 

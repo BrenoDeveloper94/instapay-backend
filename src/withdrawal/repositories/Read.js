@@ -52,6 +52,7 @@ const read = async (req, res) => {
 
         try {
 
+            const count = await prisma.withdrawal.count()
             const data = await prisma.withdrawal.findMany({
                 take: take,
                 skip: skip,

@@ -4,7 +4,7 @@ const repositoriesRead = require('../repositories/Read')
 const repositoriesReadSingle = require('../repositories/ReadSingle')
 
 
-const router = express.Router() //Instantiating routes
+const router = express.Router() 
 
 // Routes
 router.post('/proposal', repositoriesCreate.create)

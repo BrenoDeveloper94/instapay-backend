@@ -7,6 +7,7 @@ const upload = async (req, res) => {
 
     var file = req.file
     var id = parseInt(req.params.id)
+
     
     try {
         

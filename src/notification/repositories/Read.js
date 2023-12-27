@@ -21,7 +21,8 @@ const read = async (req, res) => {
                             user:{
                                 select:{
                                     first_name: true,
-                                    last_name: true
+                                    last_name: true,
+                                    profile_image: true
                                 }
                             }
                         }
@@ -49,7 +50,8 @@ const read = async (req, res) => {
                             user:{
                                 select:{
                                     first_name: true,
-                                    last_name: true
+                                    last_name: true,
+                                    profile_image: true
                                 }
                             }
                         }

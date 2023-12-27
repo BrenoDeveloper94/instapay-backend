@@ -12,6 +12,7 @@ CREATE TABLE `users` (
     `last_acess` DATETIME(3) NOT NULL,
     `login_type` BOOLEAN NOT NULL DEFAULT false,
     `url_profile` VARCHAR(255) NOT NULL,
+    `profile_image` VARCHAR(255) NOT NULL,
     `id_categories` INTEGER NOT NULL,
 
     UNIQUE INDEX `users_cpf_key`(`cpf`),
@@ -44,6 +45,7 @@ CREATE TABLE `proposals` (
     `title_proposal` VARCHAR(50) NOT NULL,
     `description` TEXT NOT NULL,
     `proposal_value` FLOAT NOT NULL,
+    `file_image` VARCHAR(255) NOT NULL,
     `status_proposal` BOOLEAN NOT NULL DEFAULT false,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
@@ -66,7 +68,6 @@ CREATE TABLE `payments` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `id_accepted` INTEGER NOT NULL,
     `payment_value` FLOAT NOT NULL,
-    `payment_method` VARCHAR(30) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
@@ -119,6 +120,15 @@ CREATE TABLE `credit_card` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- CreateTable
+CREATE TABLE `bank_balance` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `id_user` INTEGER NOT NULL,
+    `balance` FLOAT NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- AddForeignKey
 ALTER TABLE `users` ADD CONSTRAINT `users_id_categories_fkey` FOREIGN KEY (`id_categories`) REFERENCES `categories`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -154,3 +164,6 @@ ALTER TABLE `access` ADD CONSTRAINT `access_id_user_fkey` FOREIGN KEY (`id_user`
 
 -- AddForeignKey
 ALTER TABLE `credit_card` ADD CONSTRAINT `credit_card_id_user_fkey` FOREIGN KEY (`id_user`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `bank_balance` ADD CONSTRAINT `bank_balance_id_user_fkey` FOREIGN KEY (`id_user`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

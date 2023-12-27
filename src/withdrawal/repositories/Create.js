@@ -9,6 +9,7 @@ const create = async (req, res) => {
     var available_value = parseFloat(data.data.available_value)
     var withdrawals_amount = parseFloat(data.data.withdrawals_amount)
 
+
     const d = new Date()
 
     if (withdrawals_amount <= available_value) {

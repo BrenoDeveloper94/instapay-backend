@@ -77,7 +77,6 @@ model Proposal {
     title_proposal     String @db.VarChar(50)
     description        String @db.Text
     proposal_value     Float @db.Float
-    file_image         String @db.VarChar(255)
     status_proposal    Boolean @default(false)
     created_at         DateTime @default(now())
 
@@ -124,7 +123,7 @@ model Payment {
 // bank_account
 model Bank_account {
     id                   Int @id @default(autoincrement())
-    id_user              Int
+    id_user              Int @unique
     id_bank              Int
     agency               String @db.VarChar(100)
     agency_digit         String @db.Char(1)
@@ -149,7 +148,7 @@ model Withdrawal {
     created_at              DateTime @default(now())
 
     // Relations
-    bank_account Bank_account @relation(fields: [id_bank_account], references: [id])
+    bank_account Bank_account @relation(fields: [id_bank_account], references: [id_user])
 
     // Rename
     @@map("withdrawals")
