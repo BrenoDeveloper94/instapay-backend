@@ -19,6 +19,10 @@ const update = async (req, res) => {
     var cpf = data.data.cpf
     var id_categories = parseInt(data.data.id_categories)
 
+    if (!id_categories) {
+        id_categories = 1
+    }
+
     if (login_type == '1') {
         login_type = true
     } else {

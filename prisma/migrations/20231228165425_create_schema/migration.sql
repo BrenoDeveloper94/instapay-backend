@@ -45,8 +45,8 @@ CREATE TABLE `proposals` (
     `title_proposal` VARCHAR(50) NOT NULL,
     `description` TEXT NOT NULL,
     `proposal_value` FLOAT NOT NULL,
-    `file_image` VARCHAR(255) NOT NULL,
     `status_proposal` BOOLEAN NOT NULL DEFAULT false,
+    `status_accepted` BOOLEAN NOT NULL DEFAULT false,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
@@ -83,6 +83,7 @@ CREATE TABLE `bank_account` (
     `account` VARCHAR(11) NOT NULL,
     `account_digit` CHAR(1) NOT NULL,
 
+    UNIQUE INDEX `bank_account_id_user_key`(`id_user`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -157,7 +158,7 @@ ALTER TABLE `payments` ADD CONSTRAINT `payments_id_accepted_fkey` FOREIGN KEY (`
 ALTER TABLE `bank_account` ADD CONSTRAINT `bank_account_id_user_fkey` FOREIGN KEY (`id_user`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `withdrawals` ADD CONSTRAINT `withdrawals_id_bank_account_fkey` FOREIGN KEY (`id_bank_account`) REFERENCES `bank_account`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `withdrawals` ADD CONSTRAINT `withdrawals_id_bank_account_fkey` FOREIGN KEY (`id_bank_account`) REFERENCES `bank_account`(`id_user`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `access` ADD CONSTRAINT `access_id_user_fkey` FOREIGN KEY (`id_user`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
