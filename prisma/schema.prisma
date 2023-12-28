@@ -78,6 +78,7 @@ model Proposal {
     description        String @db.Text
     proposal_value     Float @db.Float
     status_proposal    Boolean @default(false)
+    status_accepted    Boolean @default(false)
     created_at         DateTime @default(now())
 
     // Relations

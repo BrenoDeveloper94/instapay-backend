@@ -18,6 +18,15 @@ const create = async (req, res) => {
         })
         res.status(201)
         res.json({message: message.accepted.success})
+
+        await prisma.proposal.update({
+            where:{
+                id: id_proposal
+            },
+            data:{
+                status_accepted: true 
+            }
+        })
         
     } catch (error) {
         console.log(error)

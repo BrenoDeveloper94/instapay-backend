@@ -13,6 +13,7 @@ const create = async (req, res) => {
     var title_proposal = lettersName(data.data.title_proposal)
     var description = lettersName(data.data.description)
     var status_proposal = false
+    var status_accepted = false
     var proposal_value = parseFloat(data.data.proposal_value)
     const d = new Date()
 
@@ -40,6 +41,7 @@ const create = async (req, res) => {
                     description,
                     proposal_value,
                     status_proposal,
+                    status_accepted,
                     created_at: d
                 }
             })
