@@ -1,6 +1,6 @@
 const prisma = require('../../../prisma/PrismaClient')
 const message = require('../../constants')
-const lettersName = require('../../Utils/lettersName')
+
 
 
 const create = async (req, res) => {
@@ -10,8 +10,8 @@ const create = async (req, res) => {
 
     var id_user = parseInt(data.data.id_user)
     var id_categories = parseInt(data.data.id_categories)
-    var title_proposal = lettersName(data.data.title_proposal)
-    var description = lettersName(data.data.description)
+    var title_proposal = data.data.title_proposal
+    var description = data.data.description
     var status_proposal = false
     var status_accepted = false
     var proposal_value = parseFloat(data.data.proposal_value)

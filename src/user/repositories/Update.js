@@ -1,7 +1,6 @@
 const prisma = require('../../../prisma/PrismaClient')
 const message = require('../../constants')
 const bcrypt = require('bcryptjs')
-const lettersPhrase = require('../../Utils/lettersPhrase')
 
 
 const update = async (req, res) => { 
@@ -9,9 +8,9 @@ const update = async (req, res) => {
     const id = parseInt(req.params.id)
     var data = {first_name, last_name, full_name, email, login, password, login_type, cpf, id_categories} = req.body
 
-    var first_name = lettersPhrase(data.data.first_name)
-    var last_name = lettersPhrase(data.data.last_name)
-    var full_name = lettersPhrase(data.data.full_name)
+    var first_name = data.data.first_name
+    var last_name = data.data.last_name
+    var full_name = data.data.full_name
     var email = data.data.email
     var login = data.data.login
     var password = data.data.password

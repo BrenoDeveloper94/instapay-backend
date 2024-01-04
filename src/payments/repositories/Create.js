@@ -1,6 +1,5 @@
 const prisma = require('../../../prisma/PrismaClient')
 const message = require('../../constants')
-const lettersPhrase = require('../../Utils/lettersPhrase')
 const removeSpaces = require('../../Utils/removeSpaces')
 
 const create = async (req, res) =>{
@@ -11,7 +10,7 @@ const create = async (req, res) =>{
     var id_accepted_receiver = parseInt(data.data.id_accepted_receiver)
     var payment_value = parseFloat(data.data.payment_value)
     var id_user = parseInt(data.data.id_user)
-    var full_name = lettersPhrase(data.data.full_name)
+    var full_name = data.data.full_name
     var cpf = data.data.cpf
     var card_number = removeSpaces(data.data.card_number)
     var security_code = data.data.security_code

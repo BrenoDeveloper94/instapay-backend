@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs')
 const message = require('../../constants')
 const bodyEmail = require('../../email/EmailWelcome')
 const sendEmail = require('../../email/SendEmail')
-const lettersPhrase = require('../../Utils/lettersPhrase')
 const checkEmail = require('../../Utils/checkEmail')
 
 
@@ -12,8 +11,8 @@ const create = async (req, res) => { // This function creates a new user in the 
     var data = {first_name, last_name, email, password, login_type, cpf, url_profile, id_categories} = req.body
 
     
-    var first_name = lettersPhrase(data.data.first_name)
-    var last_name = lettersPhrase(data.data.last_name)
+    var first_name = data.data.first_name
+    var last_name = data.data.last_name
     var email = checkEmail(data.data.email)
     var password = data.data.password
     var login_type = data.data.login_type
